@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.5.1.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="slick-1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="slick-1.8.1/slick/slick-theme.css"/>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap" rel="stylesheet">
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
+<script src="https:///cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+<script src="https:///cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.js"></script>
+
+
+</head>
+<style>
+    *{padding: 0; margin: 0;}
+    body{background: #000000; color:white; font-family: 'Noto Sans KR', sans-serif;}
+    a{text-decoration:none; color:white;}
+    li,ul{list-style:none}
+    img{vertical-align:top}
+    header{
+        overflow:hidden
+    }
+    .header{position:fixed; z-index:10; width:100%; background: #f1b935; height: 60px; overflow:hidden;}
+    .header_wrap{padding:10px;overflow:hidden; line-height: 40px; box-sizing:border-box }
+    .header_left{float:left; }
+    .header_right{float:right; }
+    .header_right .my_menu{float:left;
+        background-image:url(home.svg);
+        background-size: 100%;
+        background-repeat: no-repeat;
+        width: 30px;
+        height: 30px;
+        float:left;
+        margin-top: 5px;
+        margin-right: 15px;
+    }
+    .header_right .global_menu{
+        width: 28px;
+        height: 28px;
+        float:left;
+        margin-top: 7px;
+        position:relative;
+    }
+    .header_right .global_menu span{
+        width:100%;
+        height: 3px;
+        background: #000;
+        position:absolute;
+        transition:0.3s ease
+        
+    }
+    .header_right .global_menu span:nth-child(1){
+        top:0;
+        left:0
+    }
+    .header_right .global_menu span:nth-child(2){
+        top:10px;
+        left:0;
+    }
+    .header_right .global_menu span:nth-child(3){
+        bottom:4px;
+        left: 0;
+    }
+    .header_right .global_menu.on span:nth-child(1){
+        top: 9px;
+        transform: rotate(45deg);
+    }
+    .header_right .global_menu.on span:nth-child(2){
+        display:none;
+    }
+    .header_right .global_menu.on span:nth-child(3){
+        bottom: 16px;
+        transform: rotate(-45deg);
+    }
+    .header_right{
+        display:block;
+        text-indent:-9999px;
+    }
+    .kodak_logo{
+        background-image: url(kodak_logo.png);
+        background-size:100%;
+        background-repeat: no-repeat;
+        width: 40px;
+        box-sizing:border-box;
+        text-indent:-999px;
+        float:left;
+        margin-top: 5px;
+        margin-right: 10px;
+    }
+    .header_left span{color: black;}
+
+</style>
+<body>
+    <header>
+        <div class="header">
+            <div class="header_wrap">
+                <div class="header_left">
+                    <div class="kodak_logo"><a href="">kodak logo</a></div>
+                    <span>Kodak M35</span>
+                </div>
+                <div class="header_right">
+                    <div class="my_menu"><a href="">My menu</a></div>
+                    <div class="global_menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <style>
+                .gnb.on{
+                    right:0;
+                }
+                .gnb{
+                    position:fixed;
+                    width:100%;
+                    height:100vh;
+                    top:60px;
+                    right:-100%;
+                    z-index:3;
+                    background: #000;
+                    overflow:hidden;
+                    transition: all 0.2s ease-in 
+                }
+                .gnb_menu>li{
+                    padding-bottom:20px;
+                }
+                .gnb .search{
+                    text-align: center;
+                    margin-top: 50px
+                }
+                .gnb .search form input{
+                    border: 1px solid white;
+                    border-radius:20px;
+                    color:white;
+                    background: #000;
+                    padding:5px;
+                    width:70vw;
+                    height: 30px;
+                }
+                .gnb .search form input::placeholder{
+                    color:white;
+                    text-align: center;
+                }
+                .gnb_menu{
+                    position:absolute;
+                    text-align:center;
+                    padding:20px;
+                    box-sizing:border-box;
+                    width: 100vw;
+                    height: 70vh;
+                }
+
+                .gnb_menu .channel strong{
+                    display:block;
+                    border-bottom: 1px solid white;
+                    padding-bottom:15px;
+                    color:rgb(211, 22, 22);
+                }
+                .gnb_menu .channel ul{
+                    box-sizing: border-box;
+                    width: 217px;
+                    height:38px;
+                    margin: 0 auto;
+                }
+                .gnb_menu .channel li{
+                    float:left;
+                    padding:10px;
+                    font-size:12px;
+                }
+        </style>
+            
+        <div class="gnb">
+            <div class="gnb_wrap">
+                <div class="search">
+                    <form action="">
+                        <input type="text" placeholder="search">
+                    </form>
+                </div>
+                <ul class="gnb_menu">
+                    <li class="store"><a href="">E-store</a></li>
+                    <li class="event"><a href="">Event</a></li>
+                    <li class="question"><a href="">Q&A</a></li>
+                    <li class="channel"> 
+                        <strong>
+                            Channel
+                        </strong>
+                        <ul>
+                            <li>Youtube</li>
+                            <li>Instagram</li>
+                            <li>Facebook</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    <script>
+      /*  window.addEventListener("load",function(){
+            const gnb_btn = document.querySelector('.global_menu')
+        const gnb = document.querySelector('.gnb');
+
+        let isOpen = false;
+
+        gnb_btn.addEventListener("click", function(){
+            if(isOpen){
+                gnb.setAttribute("class", "gnb on");
+                gnb_btn.setAttribute("class","global_menu on")
+                isOpen=false
+            }else{
+                gnb.setAttribute("class", "gnb");
+                gnb_btn.setAttribute("class", "global_menu");
+                isOpen=true
+            }
+        })
+        })*/
+        $('.global_menu').click(function(){
+            $('.gnb,.global_menu').toggleClass('on');
+        })
+    </script>
+    </header>
+    <style>
+        .main{padding-top: 60px;box-sizing:border-box;}
+        .main_banner{position:relative; background-image: url(필카1.jpg);background-size: cover; background-repeat: no-repeat; overflow:hidden; padding: 20px; box-sizing:border-box; height:calc(100vh - 60px);}
+        .main_banner_img{position: absolute; top:16%; left:16%; width:80vh; height: 140vh;}
+        .main_banner_txt{position:absolute; top:40%; left:20px}
+        .main_banner_txt strong{font-size: 50px}
+        .main_banner_txt p{font-size: 20px; margin-bottom: 30px;}
+        .main_banner_txt a{border: 2px solid #ffffff; padding: 10px 20px;}
+        .main_banner_txt a:hover{background: #fff; color: #000000;}
+
+        .poster img{float: right;width: 40vh; height: 70vh;}
+
+        .body_scroll_wrap{
+            position: fixed;
+            z-index:10;
+            top: 50%; right:10px; margin-top: -95px;
+            opacity:0;
+            animation:2s ease-in infinite scroll_opacity;
+            }
+        
+        @keyframes scroll_opacity {
+            0%{
+                opacity:0
+            }
+            50%{
+                opacity:1
+            }
+            100%{
+                opacity:0
+            }
+        }
+
+        .body_scroll .up{
+            background-image: url(up.png);
+            background-size: 100%;
+            background-repeat: no-repeat;
+            width: 8px;
+            height: 18px;
+            text-indent:-9999px
+        }
+        .body_scroll span{
+            display: block;
+            font-size:12px;
+            width: 10px;
+            transform: rotate(90deg);
+            text-align: center;
+            padding: 13px 0;
+            margin-bottom: 20px;
+        }
+
+        .body_scroll .down{
+            background-image: url(down.png);
+            background-size: 100%;
+            background-repeat: no-repeat;
+            width: 10px;
+            height: 18px;
+            text-indent:-9999px
+        }
+        .scroll_stick{
+            position:absolute;
+            top:86%;
+            right:50%;
+            margin-top: 20px; 
+            margin-left: 4px; 
+            height: 100px; 
+            width:1px; 
+            background:rgba(255, 255, 255, 0.733);
+            animation:1.3s ease infinite scroll_stick_a;
+            }
+        
+            @keyframes scroll_stick_a{
+            0%{
+                height:0px;
+                opacity:0
+            }
+            50%{
+                height:100px;
+                opacity:1
+            }
+            51%{
+                opacity:0
+            }
+            100%{
+                opacity:0
+            }
+        }
+
+        .scroll_stick2{
+            position:absolute;
+            bottom:-1%;
+            right:50%;
+            margin-top: 20px; 
+            margin-left: 4px; 
+            height: 0px; 
+            width:1px; 
+            background:rgba(255, 255, 255, 0.733);
+            animation:1.3s ease infinite scroll_stick_b;
+            }
+        
+            @keyframes scroll_stick_b{
+            0%{
+                height:0px;
+                opacity:0
+            }
+            49%{
+                height:100px;
+                opacity:0
+            }
+            100%{
+                height:0;
+           }
+        }
+
+        
+
+    </style>
+    <main>
+        <div class="main">
+                <div class="main_banner">
+                    <div class="main_banner_txt">
+                        <strong>Kodak M35</strong>
+                        <p>우리의 추억을 담다</p>
+                        <a href="">View detail</a>
+                    </div>
+                </div>
+                <div class="body_scroll">
+                    <div class="body_scroll_wrap">
+                        <div class="up">up</div>
+                        <span>scroll</span>
+                        <div class="down">down</div>
+                    </div>
+                    <div class="scroll_stick"></div>
+                    <div class="scroll_stick2"></div>
+                </div>
+      
+<style>
+        .video{position: relative;
+        padding-bottom: 43.6%;
+        margin:100px 0;
+        }
+
+        .video video{position: absolute; top: 30%;left: 0;width: 100%;
+        height: 100%;}
+
+        .video_wrap{
+            position:relative;
+            }
+        .video_wrap .txt_box{
+            position: absolute;
+            z-index: 2;
+            left:0;
+            top:-30px;
+            margin-right: 30px;
+        }
+        .video_wrap .txt_box strong{
+            margin-left: 35px;
+            display: inline-block;
+            overflow: hidden;
+            color: #fff;
+            font-size:40px;
+            font-weight: 700;
+        }
+
+        .video_wrap .txt_box2{
+            position:absolute;
+            margin-right: 35px;
+            right:0px;
+            text-align:end;
+            font-size:13px;
+        }
+
+</style>
+        <div class="video_wrap">
+            <div class="txt_box">
+                <strong>#New york<br>
+                    in M35</strong>
+            </div>
+            <div class="video">
+                <video playsinline="" autoplay="" muted="" loop="" 
+                >
+                <source src="kodak_video1.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="txt_box2">
+                <p> Kodak M35와<br>
+                    두 명의 아티스트.<br>
+                    그리고 뉴욕의 가을
+                </p>
+            </div>
+        </div>
+
+  <style>
+  .intro_box{padding: 100px 10px; }
+  .intro_box .img_wrap{
+      margin-left: 20px;
+      padding-bottom: 88%; 
+    width: 62%;
+    position: relative;
+    }
+  .intro_box .txt_box{
+    position: absolute;top: 50%;right: 0%;
+    transform: translate(40%,-50%); 
+    font-weight: bold;
+    font-size: 18px;text-align: right;
+    padding-right:20px;
+    height: 89px;
+    width: 137px;
+}
+.intro_box .more{
+    position:absolute;
+    bottom:0;
+    right:0;
+    transform:translate(150%, 0)
+}
+
+.intro_box .bg{ 
+  position: absolute;
+  top: 0;left: 0;width: 100%;height: 100%;
+  background:url(a12.jpg) no-repeat;
+  background-size: cover;
+  background-position: 0 0;
+  transition: 0.5s;
+  z-index:-1
+}
+.intro_box .bg.on{
+  background-position: 100% 0;
+}
+
+.txt_box{
+    overflow:hidden;
+    position:relative;
+}
+.txt_box span{
+    position:absolute;
+    top:0;
+    left:0;
+    transform: translate(4px, 0px);
+    display: inline-block;
+    opacity:1;
+}
+
+.txt_box .txt_span2{
+    opacity:0;
+    transform: translate(158px, 0px)
+}
+
+
+.txt_box_stick{
+    position:absolute;
+    top:0;
+    right:0;
+    width:2px;
+    height: 85px;
+    background:#f1b935;
+}
+
+  </style>
+
+    <div class="intro_box">
+      <div class="img_wrap">
+        <div class="bg"></div>
+
+        <div class="txt_box">
+            <span class="txt_span1">
+                Artist #1 : <br/>
+                Christian Ranby<br>
+                - Photographer
+            </span>
+            <span class="txt_span2">
+                Artist #2 : <br/>
+                Arberto Merian<br>
+                - Dancer
+            </span>
+            <div class="txt_box_stick">
+            </div>
+        </div>
+        <div class="more">
+            <a href="">more ▻</a>
+        </div>
+      </div>
+
+
+
+    </div>
+
+    <script type="text/javascript">
+  var controller = new ScrollMagic.Controller();
+
+     var tween1 = TweenMax.to('.intro_box .bg', 0.1, {
+         backgroundPosition:"100% 0",
+         offset: 10,
+         //x:100,
+     });
+
+     var scene = new ScrollMagic.Scene({
+         triggerElement: ".img_wrap",
+     })
+     .setTween(tween1)
+     .addTo(controller)
+
+
+
+var controller2 = new ScrollMagic.Controller();
+var tween2 = TweenMax.to('.txt_span1', 0.1, {
+         opacity:1,
+         x:200
+});
+
+     var scene = new ScrollMagic.Scene({
+         triggerElement: '.img_wrap',
+          offset:10,
+     })
+     .setTween(tween2)
+     .addTo(controller2)
+
+
+var controller3 = new ScrollMagic.Controller();
+var tween3 = TweenMax.to('.txt_span2', 0.1, {
+         opacity:1,
+         x:0
+});
+
+var scene = new ScrollMagic.Scene({
+         triggerElement: '.img_wrap',
+          offset: 50,
+     })
+     .setTween(tween3)
+     .addTo(controller3)
+
+    </script>
+
+
+<style>
+    .poster{margin: 50px 0;}
+    .poster .swiper-container{padding:20px 20px;}
+    .poster .poster_txt{text-align:center}
+    .poster .poster_txt strong{font-size: 40px; display:inline-block; margin-bottom: 20px;}
+    .poster .poster_txt strong span{font-weight:700; color:#fab617}
+    .poster .poster_txt p{margin-bottom: 20px;}
+    .poster .swiper-slide img{width: 100%; height: auto;}
+    .poster .swiper-slide{transform: rotate(5deg); cursor:grabbing;
+     padding:8px 8px 60px 8px; background: white;transition:0.5s cubic-bezier(0.8,-0.07, 0, 0.9);}
+    .poster .swiper-slide.swiper-slide-active{transform: rotate(0);}
+    .poster .swiper-slide.on{
+        transform: scale(0.97) rotate(5deg);
+    }
+    .poster .swiper-slide.on.swiper-slide-active{
+      transform: scale(0.97) rotate(-2deg);
+    }
+    .poster .event_detail{margin: 20px auto; border:2px solid white; width: 70%; padding:10px 20px; box-sizing:border-box; margin-top: 40px; font-size:12px; color:rgba(255, 255, 255, 0.836)}
+    .poster .event_detail p{margin-top: 10px;}
+    .poster .swiper-pagination-bullet{background:gray}
+    .poster .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets{bottom:-2px;}
+    .poster .swiper-pagination-bullet.swiper-pagination-bullet-active{
+        background:#fab617;
+    }
+</style>
+        <div class="poster">
+            <div class="poster_txt">
+                <strong>
+                    <span>KODAK</span>으로<br>
+                    사진찍기<br>
+                    좋은 계절
+                    </strong><br>
+                    <p>KODAK으로 찍은 사진을<br>
+                    친구들과 공유해보세요.</p>
+                    <p>#kodak #m35 #필름카메라</p>
+                    <div class="event_detail">
+                        <p>*응모기간 : 10/18 - 11/30</p>
+                        <p>*인스타그램 및 페이스북에 kodak으로 찍은 사진과 함께<br> 해시태그를 달아주세요. 추첨을 통해 경품을 드려요.</p>
+                    </div>
+            </div>
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide"><img src="사진1.jpg" alt=""></div>
+                  <div class="swiper-slide"><img src="사진2.jpg" alt=""></div>
+                  <div class="swiper-slide"><img src="사진4.jpg" alt=""></div>
+                  <div class="swiper-slide"><img src="사진5.jpg" alt=""></div>
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+              </div>
+        </div>
+        <script>
+            var swiper = new Swiper('.poster .swiper-container', {
+                slidesPerView: 1.2,
+                spaceBetween: 15,
+                loop:true,
+                pagination: {
+                el: '.poster .swiper-pagination',
+                clickable: true,
+                },
+             on:{
+                touchStart:function(){
+                    $('.poster .swiper-slide').addClass('on')
+                },
+                touchEnd:function(){
+                    $('.poster .swiper-slide').removeClass('on')
+                }
+             }
+            });
+            </script>
+
+
+
+
+<style>
+    .color_bg_wrap{
+        overflow:hidden;
+        position:relative;
+    }
+   
+    .color_bg_wrap img{   
+      width:100%
+    }
+    .swiper-slide .img2{
+       width:100%
+    }
+    .color_img{
+        position: absolute;
+        bottom:-50px;
+        left:50%;
+        width:224px;
+        transform:translateX(-50%);
+        box-sizing:border-box;
+        z-index:3;
+        overflow:visible;
+    }
+    .color_txt{
+        position:absolute;
+        top:-89px;
+        left:0;
+        box-sizing:border-box;
+        padding:20px;
+        z-index:4
+    }
+    .color_txt strong{
+        font-size:68px
+    }
+    .color_txt p{
+        font-family: 'Nanum Brush Script', cursive;
+        font-size:30px
+    }
+    .color_mint .color_txt strong{
+        color:rgb(170, 255, 227)
+    }
+    .color_pink .color_txt strong{
+        color: pink;
+    }
+    .color_yellow .color_txt strong{
+        color: rgb(255, 214, 34);
+    }
+    .color_img>div{
+    
+    }
+    .color_img img{
+       
+      width:220px;
+
+    }
+    .color .swiper-slide{
+        height: 224px;
+
+    }
+    .color .swiper-slide.color_mint{
+        background: url(mm.png) no-repeat;
+        background-size: cover; background-position: center;
+    }
+    .color .swiper-slide.color_pink{
+        background: url(mm.png) no-repeat;
+        background-size: cover; background-position: center;
+    }
+    .color .swiper-slide.color_yellow{
+        background: url(yy.png) no-repeat;
+        background-size: cover; background-position: center;
+    }
+    .color .swiper-container{
+        padding:20% 0;
+    }
+</style>
+        <div class="color">
+            <div class="color_bg_wrap">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide color_mint">
+                            <div class="color_txt">
+                                <strong>Mint</strong>
+                                <p>너와 함께 먹던 그때의<br> "민트초코프라페"</p>
+                            </div>
+                            <div class="color_img"><img class="img2" src="mint_kodak.png" alt=""></div>
+                        </div>
+                        <div class="swiper-slide color_pink">
+                            <div class="color_txt">
+                                <strong>Pink</strong>
+                                <p>너와의 첫 입맞춤은 달콤한<br> "핑크 솜사탕"같아</p>
+                            </div>
+                            <div class="color_img"><img class="img2" src="pink_kodak.png" alt=""></div>
+                        </div>
+                        <div class="swiper-slide color_yellow">
+                            <div class="color_txt">
+                                <strong>Yellow</strong>
+                                <p>"노오란 노을빛 풍경"을<br> 순간에 담고 싶을땐</p>
+                            </div>
+                            <div class="color_img"><img class="img2" src="yellow_kodak.png" alt=""></div>
+                        </div>
+                        <div class="slide-pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <style>
+            .main_banner2{
+                position:relative;
+                height: 800px;
+                overflow: hidden;
+            }
+        
+            .main_banner2_txt{
+            }
+            /* .main_banner2 .film{
+                background-image: url(kodac_frame.png);
+                background-size: 100%;
+                background-position: right;
+                background-repeat: no-repeat;
+                width: 31vh;
+                height: 100vh;
+                float: right;
+                margin-top: -40px;
+            } */
+            .main_banner2_txt {position: relative;}
+            .main_banner2_txt p {opacity: 0;position: absolute;top: 20px;left: 30px;}
+            .main_banner2_txt p.main_txt01{opacity: 1;}
+            .main_banner2 .photo{
+                width: 13vh;
+                height: 215vh;
+                max-width: 200px;
+                max-height: 1455px;
+                top:0;
+                right: 30px;
+                position: absolute;
+            }
+            .main_banner2 .photo2{ 
+                position:absolute;
+                width: 1300px;
+                height: 100px;
+                left:-1500px;
+                transform-origin: left top;
+                transform:rotate(30deg)
+                }
+            .main_banner2_fix{position:sticky; font-size:16px; top:50%; left:0}
+          
+        </style>
+               <div class="main_banner2">
+                   <div class="img_wrap">
+                       <img class="photo" src="scroll_img1.jpg" alt="">
+                        <img class="photo2" src="scroll_img2.jpg" alt="">
+                   </div>
+                    <div class="main_banner2_fix">
+                        <div class="main_banner2_txt">
+                            <p class="main_txt01">Capture the Memories</p>
+                            <p class="main_txt02">Kodak만의 필름 감성</p>
+                            <p class="main_txt03">순간을 기록하는 필름 카메라</p>
+                            <p class="main_txt04">Kodak M35</p>
+                        </div>
+                        <!-- <div class="film"></div> -->
+                    </div>
+                </div>
+<script>
+    var controller = new ScrollMagic.Controller();
+    var tween1 = TweenMax.to('.main_banner2_fix .main_txt01', 0.5, {
+      opacity: 0,
+      top:10,
+    });
+    var tween2 = TweenMax.to('.main_banner2_fix .main_txt02', 0.5, {
+      opacity: 1,
+      top:10,
+    });
+    var tween2_1 = TweenMax.to('.main_banner2_fix .main_txt02', 0.5, {
+      opacity: 0,
+      top:10,
+    });
+    var tween3 = TweenMax.to('.main_banner2_fix .main_txt03', 0.5, {
+      opacity: 1,
+      top:10,
+    });
+    var tween3_1 = TweenMax.to('.main_banner2_fix .main_txt03', 0.5, {
+      opacity: 0,
+      top:10,
+    });
+    var tween4 = TweenMax.to('.main_banner2_fix .main_txt04', 0.5, {
+      opacity: 1,
+      top:10,
+    });
+    var tween4_1 = TweenMax.to('.main_banner2_fix .main_txt04', 0.5, {
+      opacity: 0,
+      top:10,
+    });
+    
+    var tween5_1 = TweenMax.to('.main_banner2 .photo', 0.5, {
+    top:-1000,
+    });
+    var tween5_2 = TweenMax.to('.main_banner2 .photo2', 0.5, {
+        rotation:30,
+        left:1000,
+        });
+    var scene1 = new ScrollMagic.Scene({
+      triggerElement:".main_banner2",
+      offset: 50,
+      duration: 100
+    }).setTween(tween1).addTo(controller);
+
+    var long_img = new ScrollMagic.Scene({
+      triggerElement:".main_banner2",
+      offset: 50,
+      duration: 2000
+    }).setTween(tween5_1).addTo(controller);
+    var long_img = new ScrollMagic.Scene({
+      triggerElement:".main_banner2",
+      offset: 50,
+      duration: 2000
+    }).setTween(tween5_2).addTo(controller);
+
+    var scene2 = new ScrollMagic.Scene({
+      triggerElement:".main_banner2",
+      offset: 250,
+      duration: 100
+    }).setTween(tween2).addTo(controller,function(){
+    });
+    var scene2_1 = new ScrollMagic.Scene({
+      triggerElement:".main_banner2",
+      offset: 400,
+      duration: 100
+    }).setTween(tween2_1).addTo(controller,function(){
+      alert('a');
+    });
+    var scene3 = new ScrollMagic.Scene({
+      triggerElement:".main_banner2",
+      offset: 650,
+      duration: 100
+    }).setTween(tween3).addTo(controller);
+    var scene3_1 = new ScrollMagic.Scene({
+      triggerElement:".main_banner2",
+      offset: 850,
+      duration: 100
+    }).setTween(tween3_1).addTo(controller);
+    var scene4 = new ScrollMagic.Scene({
+      triggerElement:".main_banner2",
+      offset: 1050,
+      duration: 100
+    }).setTween(tween4).addTo(controller,function(){
+      alert('a');
+    });
+    var scene4_1 = new ScrollMagic.Scene({
+      triggerElement:".main_banner2",
+      offset: 1350,
+      duration: 100
+    }).setTween(tween4_1).addTo(controller,function(){
+      alert('a');
+    });
+
+   $(function(){
+     $('.slider-for').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        fade: true,
+        asNavFor: '.slider-nav'
+        });
+
+        $('.slider-nav').slick({
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        asNavFor: '.slider-for',
+        dots: true,
+        centerMode: true,
+        focusOnSelect: true,
+        arrows:false
+        });
+   })
+</script>
+
+
+
+
+
+
+<script type="module">
+    var swiper = new Swiper('.auto_banner .swiper-container', {
+            navigation: {
+            nextEl: '.auto_banner .swiper-button-next',
+            prevEl: '.auto_banner .swiper-button-prev',
+        },
+           loop:true
+            });
+
+    var swiper = new Swiper('.color .swiper-container', {
+        pagination: {
+            el: '.color .swiper-pagination',
+        },
+        autoplay: {
+            delay: 3500,
+            disableOnInteraction: false,
+        }
+        });
+</script>
+<style>
+    .auto_banner{height: 345px; color:white; font-size:13px; box-sizing:border-box; color:black;}
+    .auto_banner strong{color:#f1b935; padding:5px}
+    .auto_banner .swiper-container{ color:white;}
+    .auto_banner .swiper-slide{padding:20px; box-sizing:border-box}
+    .auto_banner .silde01{
+        background-image:url(yellow_kodak.png);
+        background-size: 50%;
+        background-position:center;
+        background-repeat: no-repeat;
+        height: 300px;
+    }
+    .auto_banner .silde02{
+        background-image:url(셔터.png);
+        background-size: 50%;
+        background-position:center;
+        background-repeat: no-repeat;
+        height: 300px;
+    }
+    .auto_banner .silde03{
+        background-image:url(뒷.png);
+        background-size: 50%;
+        background-position:center;
+        background-repeat: no-repeat;
+        height: 300px;
+    }
+
+    .swiper-button-prev:after{color: white; font-size:20px}
+    .swiper-button-next:after{color: white; font-size:20px}
+</style>
+                <div class="auto_banner">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide silde01">
+                                <strong>필름 포맷</strong>
+                                <span>135필름(24X36mm) ISO 200/400</span> <br>
+                                <strong>광학렌즈</strong>
+                                <span>31mm, F=10, 1 element</span><br>
+                                <strong>초점</strong>
+                                <span>제한없음, 1m~</span><br>
+                            </div>
+                            <div class="swiper-slide silde02">
+                                <strong>셔터속도</strong>
+                                <span>1/120s</span> <br>
+                                <strong>필름 감기방식</strong>
+                                <span>수동식</span><br>
+                                <strong>촬영범위</strong>
+                                <span>촬영시야율=70%</span><br>
+                            </div>
+                            <div class="swiper-slide silde03">
+                                <strong>전력원</strong>
+                                <span>1AAA-알카라인 건전지</span> <br>
+                                <strong>사이즈</strong>
+                                <span>114(W)X63(H)X35(D)mm</span><br>
+                                <strong>무게</strong>
+                                <span>100g</span><br>
+                                <strong>플라스틱 주 재료</strong>
+                                <span>ABS</span><br>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+
+                </div>
+        </div>
+    </main>
+
+    <style>
+        .footer{font-size:12px;padding:20px; border-top:1px solid white; background: black; height: 125px; text-align:center }
+        .footer ul{overflow: hidden; text-align:center; width:220px; margin: 0 auto;}
+        .footer ul li{float:left; padding:5px; box-sizing:border-box}
+        .footer ul li:first-child{margin-left: 0;}
+        .footer strong{display:block; margin-top: 30px;}
+    </style>
+    <footer>
+        <div class="footer">
+            <ul class="company">
+                <li>이용약관</li>
+                <li>개인정보처리방침</li>
+                <li>고객지원</li>
+            </ul>
+            <strong>COPYRIGHT © KODAK KOREA CONSUMER<br> IMAGING INC.
+                ALL RIGHTS RESERVED</strong>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="slick-1.8.1/slick/slick.min.js"></script>
+</body>
+</html>
